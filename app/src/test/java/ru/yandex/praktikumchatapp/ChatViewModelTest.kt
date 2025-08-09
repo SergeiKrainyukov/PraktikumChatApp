@@ -38,7 +38,7 @@ class ChatViewModelTest {
     fun `send message should update messages with MyMessage`() = runTest {
         val message = Message.MyMessage("TestMessage")
         viewModel.sendMyMessage(message.text)
-        assertThat(message, equalTo(viewModel.messages.value.first()))
+        assertThat(viewModel.messages.value.first(), equalTo(message))
     }
 
     @Test
@@ -55,7 +55,6 @@ class ChatViewModelTest {
 
         jobs.joinAll()
 
-        assertThat(messagesToSend.size, equalTo(viewModel.messages.value.size))
-
+        assertThat(viewModel.messages.value, equalTo(messagesToSend))
     }
 }
